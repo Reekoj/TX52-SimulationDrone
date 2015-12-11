@@ -8,12 +8,27 @@ public class DroneControllerForceTest : MonoBehaviour {
     public float heliceSpeed3 = 1.0f;
     public float heliceSpeed4 = 1.0f;
 
+    public float throttleUp = 1.0f;
+    public float altitudeMin = 5;
+
     public Transform heliceFront1;
     public Transform heliceFront2;
     public Transform heliceBack1;
     public Transform heliceBack2;
 
     private Rigidbody mainBody;
+
+    ///////// A ETUDIER PLUS TARD /////////
+    // faire tourner les hélices : 
+    //		if (name.Equals ("One") || name.Equals ("Two")) {
+    //			helice.transform.rotation = helice.transform.rotation* Quaternion.Euler((vitesse), 0, 0);	
+    //		}else{
+    //			helice.transform.rotation = helice.transform.rotation* Quaternion.Euler(-(vitesse), 0, 0);	
+    //		}
+    // Recuperer l'altitude : 
+    // penser à Collider.Raycast pour savoir ce qu'il y a en dessous du drone
+    ////////////////////////////////////////
+
 
     // Use this for initialization
     void Start () {
@@ -32,7 +47,6 @@ public class DroneControllerForceTest : MonoBehaviour {
         Debug.Log(heliceFront2.position.ToString());
         Debug.Log(heliceBack1.position.ToString());
         Debug.Log(heliceBack2.position.ToString());
-
 
         // 2 13 5 9 
         //heliceFront1 = this.transform.Find("Cone.002").gameObject;
@@ -62,6 +76,15 @@ public class DroneControllerForceTest : MonoBehaviour {
         droneMovement();
     }
 
+    void upLift()
+    {
+
+    }
+
+    void downFall ()
+    {
+
+    }
 
     void droneMovement()
     {
@@ -91,6 +114,6 @@ public class DroneControllerForceTest : MonoBehaviour {
             mainBody.AddForceAtPosition(new Vector3(0, heliceSpeed1, 0), heliceBack2.position, ForceMode.Force);
         }
 
-        mainBody.AddRelativeForce(0, heliceSpeed1*0.18f, 0, ForceMode.Impulse);
+        mainBody.AddRelativeForce(0, 9.81f, 0, ForceMode.Force);
     }
 }
